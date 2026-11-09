@@ -309,6 +309,8 @@
       "description": "",
       "label": ""
     },
+    "linkUrl": "",
+    "linkUrlDescription": "",
     "markers": {
       "circle": "Círculo",
       "diamond": "Losango",
@@ -335,7 +337,8 @@
       "label": "Marcador de período"
     },
     "tileUrl": "URL dos blocos do mapa",
-    "tileUrlDescription": "URL personalizada dos blocos do mapa. Use {z}, {x} e {y} como marcadores. Deixe em branco para usar o OpenStreetMap."
+    "tileUrlDescription": "URL personalizada dos blocos do mapa. Use {z}, {x} e {y} como marcadores. Deixe em branco para usar o OpenStreetMap.",
+    "usePathfinderMap": ""
   },
   "sections": {
     "advanced": "Avançado",

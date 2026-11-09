@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ROUTE_MODES } from "../utils/mapRoutes";
 import { MAP_DATE_FILTERS, getMapDateFilter } from "../utils/mapMarkers";
+import { PATHFINDER_MAP_LINK_URL } from "../utils/mapLinks";
 import { parseTimelineInput, snapToMonthGrid, formatDateForInput } from "../utils/dateUtils";
 import { DETAIL_MIN, DETAIL_MID, DETAIL_MAX, TICK_DENSITY_MIN, TICK_DENSITY_MID, TICK_DENSITY_MAX, clamp, detailToSlider, sliderToDetail, tickDensityToSlider, sliderToTickDensity } from "../utils/sliderUtils";
 import { sanitizeTitle, loadScaleSections, validateScaleSection } from "../utils/validation";
@@ -120,6 +121,7 @@ export default function SettingsModal({
   const [useSpreadsheet, setUseSpreadsheet] = useState(false);
   const [useMaps, setUseMaps] = useState(false);
   const [mapTileUrl, setMapTileUrl] = useState("");
+  const [mapLinkUrl, setMapLinkUrl] = useState("");
   const [mapDateFilter, setMapDateFilter] = useState("all");
   const [mapEventMarker, setMapEventMarker] = useState(DEFAULT_EVENT_MARKER);
   const [mapSpanMarker, setMapSpanMarker] = useState(DEFAULT_SPAN_MARKER);
@@ -182,6 +184,7 @@ export default function SettingsModal({
     useSpreadsheet,
     useMaps,
     mapTileUrl,
+    mapLinkUrl,
     mapDateFilter: mapDateFilter === "upTo" ? "upTo" : undefined,
     mapLimitToViewportYear: mapDateFilter === "active" || undefined,
     mapEventMarker,
@@ -353,6 +356,7 @@ export default function SettingsModal({
         setUseSpreadsheet(Boolean(timelineData.file.useSpreadsheet));
         setUseMaps(Boolean(timelineData.file.useMaps));
         setMapTileUrl(timelineData.file.mapTileUrl || "");
+        setMapLinkUrl(timelineData.file.mapLinkUrl || "");
         setMapDateFilter(getMapDateFilter(timelineData.file));
         setMapEventMarker(timelineData.file.mapEventMarker || DEFAULT_EVENT_MARKER);
         setMapSpanMarker(timelineData.file.mapSpanMarker || DEFAULT_SPAN_MARKER);
@@ -516,6 +520,7 @@ export default function SettingsModal({
     useSpreadsheet,
     useMaps,
     mapTileUrl,
+    mapLinkUrl,
     mapDateFilter,
     mapEventMarker,
     mapSpanMarker,
@@ -1553,6 +1558,30 @@ export default function SettingsModal({
                     onChange={(e) => setMapTileUrl(e.target.value)}
                     placeholder="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
+                </div>
+              </div>
+              <div className="settings-row">
+                <div className="settings-row-left">
+                  <div className="settings-row-label">{t("maps.linkUrl", "Map Link URL")}</div>
+                  <div className="settings-row-description">
+                    {t("maps.linkUrlDescription", "Adds an open-in-map button beside coordinates. Use {lat}, {lng}, {zoom} as placeholders. Leave blank to hide it.")}
+                  </div>
+                </div>
+                <div className="settings-row-right">
+                  <div className="git-sync-row-controls">
+                    {!mapLinkUrl && (
+                      <button type="button" className="folder-modal-btn" onClick={() => setMapLinkUrl(PATHFINDER_MAP_LINK_URL)}>
+                        {t("maps.usePathfinderMap", "Use Pathfinder map")}
+                      </button>
+                    )}
+                    <input
+                      type="text"
+                      className="settings-input"
+                      value={mapLinkUrl}
+                      onChange={(e) => setMapLinkUrl(e.target.value)}
+                      placeholder="https://example.com/#map={zoom}/{lat}/{lng}"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="settings-row">

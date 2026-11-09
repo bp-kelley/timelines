@@ -112,6 +112,7 @@
     "lng": "lng",
     "mergeInto": "Merge Into",
     "name": "Name",
+    "openInMap": "Open location in map",
     "parent": "Parent",
     "pickCoordinates": "Pick coordinates on the map",
     "size": "Size",

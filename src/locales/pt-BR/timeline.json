@@ -112,6 +112,7 @@
     "lng": "Longitude",
     "mergeInto": "Unir a",
     "name": "Nome",
+    "openInMap": "",
     "parent": "Elemento pai",
     "pickCoordinates": "Selecionar coordenadas no mapa",
     "size": "Tamanho",

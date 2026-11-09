@@ -1513,6 +1513,7 @@ function App() {
       if (!nextFile.useSpreadsheet) delete nextFile.useSpreadsheet;
       if (!nextFile.useMaps) delete nextFile.useMaps;
       if (!nextFile.mapTileUrl) delete nextFile.mapTileUrl;
+      if (!nextFile.mapLinkUrl) delete nextFile.mapLinkUrl;
       if (!nextFile.mapLimitToViewportYear) delete nextFile.mapLimitToViewportYear;
       if (!nextFile.mapDateFilter || nextFile.mapDateFilter === "all") delete nextFile.mapDateFilter;
       if (!nextFile.mapEventMarker || nextFile.mapEventMarker === "pin") delete nextFile.mapEventMarker;
