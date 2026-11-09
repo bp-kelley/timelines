@@ -307,6 +307,8 @@
       "description": "Show a glow in the theme's link color around the globe.",
       "label": "Atmosphere Glow"
     },
+    "linkUrl": "Map Link URL",
+    "linkUrlDescription": "Adds an open-in-map button beside coordinates. Use {lat}, {lng}, {zoom} as placeholders. Leave blank to hide it.",
     "markers": {
       "circle": "Circle",
       "diamond": "Diamond",
@@ -333,7 +335,8 @@
       "label": "Span Marker"
     },
     "tileUrl": "Tile URL",
-    "tileUrlDescription": "Custom map tile URL. Use {z}, {x}, {y} as placeholders. Leave blank to use OpenStreetMap."
+    "tileUrlDescription": "Custom map tile URL. Use {z}, {x}, {y} as placeholders. Leave blank to use OpenStreetMap.",
+    "usePathfinderMap": "Use Pathfinder map"
   },
   "sections": {
     "advanced": "Advanced",

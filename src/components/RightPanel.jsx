@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useRef, useMemo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Maximize2, Minimize2, Link, Trash2, ChevronLeft, ChevronRight, ChevronDown, Pencil, Calendar, Clock, FileText, BookOpen, ImagePlus, MapPin, RotateCcw, X, Image as ImageIcon, Shapes, MoveVertical, Minus, SquareDashed, CalendarOff, EyeOff, ArrowLeftToLine, ArrowRightToLine, CaseSensitive, Plus } from "lucide-react";
+import { Maximize2, Minimize2, Link, Trash2, ChevronLeft, ChevronRight, ChevronDown, Pencil, Calendar, Clock, FileText, BookOpen, ImagePlus, MapPin, ExternalLink, RotateCcw, X, Image as ImageIcon, Shapes, MoveVertical, Minus, SquareDashed, CalendarOff, EyeOff, ArrowLeftToLine, ArrowRightToLine, CaseSensitive, Plus } from "lucide-react";
 import NoteEditor from "./NoteEditor";
 import TimelineLinksSection from "./TimelineLinksSection";
 import NoteFileName from "./NoteFileName";
@@ -65,6 +65,7 @@ import { isValidIdValue, isValidTagValue, normalizeTagValue, buildValidatedUpdat
 import { validationMessage } from "../i18n/validationMessages";
 import { normalizeColor } from "../utils/colorUtils";
 import ColorPicker from "./ColorPicker";
+import { buildMapLinkUrl } from "../utils/mapLinks";
 
 
 
@@ -1966,6 +1967,25 @@ export default function RightPanel({
                       placeholder={t("fields.lng", "lng")}
                       step="any"
                     />
+                    {(() => {
+                      const mapLink = buildMapLinkUrl(timelineData?.file?.mapLinkUrl, formData.lat, formData.lng);
+                      if (!mapLink) return null;
+                      const label = t("fields.openInMap", "Open location in map");
+                      return (
+                        <button
+                          type="button"
+                          className="coord-pick-button"
+                          onClick={() => {
+                            if (window.electron?.openExternal) window.electron.openExternal({ url: mapLink });
+                            else window.open(mapLink, "_blank", "noopener,noreferrer");
+                          }}
+                          aria-label={label}
+                          title={label}
+                        >
+                          <ExternalLink size={14} />
+                        </button>
+                      );
+                    })()}
                   </div>
                 </div>
               </div>
